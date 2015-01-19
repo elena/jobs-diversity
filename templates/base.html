@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load i18n %}
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% block header %}{% endblock header %}
+
+    <title>Diversity Rocks! {% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ STATIC_URL }}css/font-woff.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{{ STATIC_URL }}font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+  {% block extrahead %}{% endblock %}
+  </head>
+
+  <body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand page-scroll" href="/">Web Developer Jobs!</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            {% include '_menu.html' %}
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+
+{% block heading %}{% endblock %}
+
+{% if messages %}
+    <section id="content">
+      <div class="container">
+
+        <ul class="messages">
+          {% for message in messages %}
+          <p{% if message.tags %} class="message bg-{{ message.tags }} text-{{ message.tags }}"{% endif %}>{{ message }}</p>
+          {% endfor %}
+        </ul>
+
+     </div>
+    </section>
+{% endif %}
+
+{% block content_section %}
+    <!-- Content Section -->
+    <section id="content">
+      <div class="container">
+        {% block body %}{% endblock %}
+        {% block content %}{% endblock %}
+        {% block main %}{% endblock %}
+      </div>
+    </section>
+{% endblock %}
+
+{% block banner %}{% endblock %}
+
+    <footer>
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-8 text-left">
+
+            <ul class="text-left">
+              {% include '_menu.html' %}
+            </ul>
+
+          </div>
+
+          <div class="col-md-4">
+
+            <ul class="pager">
+              <li><a href="#" class="btn btn-default btn-sm">Privacy Policy</a> </li>
+              <li><a href="#" class="btn btn-default btn-sm">Terms of Use</a> </li>
+            </ul>
+
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-8">
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
+
+    <!-- jQuery -->
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="{{ STATIC_URL }}js/classie.js"></script>
+    <script src="{{ STATIC_URL }}js/cbpAnimatedHeader.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{{ STATIC_URL }}js/scripts.js"></script>
+
+    {% block extrascripts %}{% endblock %}
+    <link href="{{ STATIC_URL }}css/font-woff2.css" rel="stylesheet">
+
+  </body>
+</html>
