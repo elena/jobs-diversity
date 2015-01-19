@@ -1,0 +1,49 @@
+  <div class="col-lg-8 col-md-8">
+    <div class="post-preview">
+      <h5 class="post-title">
+        <a href="{% url "job_detail" slug=object.slug %}">{{ object.title }}</a>
+      </h5>
+      <p class="post-meta">
+        {% if object.remote %}
+          <b>Freelance/Remote/Telecommute</b>
+          <div>{{ object.location }}</div>
+        {% else %}
+          {# Add location map #}
+          <a href="#">{{ object.location }}</a>
+        {% endif %}
+      </p>
+      <p>
+        {% if object.summary_description %}
+          {{ object.summary_description }}
+        {% else %}
+          {{ object.description|safe|truncatewords_html:"50" }}
+        {% endif %} <a href="{{ object.get_absolute_url }}">...</a>
+      </p>
+      {# @@ TODO tags <p>{{ object.tags }}</p> #}
+    </div>
+  </div>
+
+
+  <div class="col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1">
+    {# fix instances of object.company #}
+    <p class="post-meta">
+
+      {% comment %}
+      {# @@ TODO Fix media serving #}
+      {% if object.company_logo %}<div><img class="img-responsive" src="{{ object.company_logo.url }}"></div>{% endif %}
+      <img class="img-responsive" src="http://placehold.it/200x150" alt="">
+      {% endcomment %}
+
+      <iframe
+         width="100%"
+         height="150"
+         frameborder="0" style="border:0"
+         src="https://www.google.com/maps/embed/v1/place?zoom=9&key=AIzaSyDnNBxSEWKyLTL0vW6coiuwYEeCm68qgUo
+              &q={{ object.location }}">
+      </iframe>
+
+      <a href="#">{{ object.company_name }}</a>
+
+    </p>
+    <p>{{ object.date_create|date:"j-M-Y" }}</p>
+  </div>

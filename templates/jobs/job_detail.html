@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-8 col-md-8 col-sm-8">
+    <!-- Title -->
+    <h1>{{ object.title }}</h1>
+
+    <p class="lead">
+      <a href="{{ object.company_link }}">{{ object.company_name }}</a>
+    </p>
+
+    <p class="post-meta">
+      {% if object.remote %}
+      <b>Freelance/Remote/Telecommute</b>
+      <div>{{ object.location }}</div>
+      {% else %}
+      {# Add location map #}
+      <a href="#">{{ object.location }}</a>
+      {% endif %}
+    </p>
+
+    <!-- Author -->
+    <!-- Date/Time -->
+    <p><span class="glyphicon glyphicon-time"></span> Posted on
+      {{ object.date_create|date:"dS F y" }}</p>
+
+    <hr>
+
+    <!-- Preview Image -->
+<iframe
+  width="100%"
+  height="300"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?zoom=6&key=AIzaSyDnNBxSEWKyLTL0vW6coiuwYEeCm68qgUo
+    &q=Raw Jam, {{ object.location }}">
+</iframe>
+
+    <hr>
+
+    <!-- Post Content -->
+    <p>{{ object.description|safe }}</p>
+
+    {% comment %}
+    {{ object.compensation }}
+    {{ object.company_logo }}
+    {{ object.company }}
+    {{ object.company_name }}
+    {{ object.company_link }}
+    {{ object.contact_name }}
+    {{ object.contact_email }}
+    {{ object.applications_close }}
+    {% endcomment %}
+  </div>
+
+  <!-- Sidebar Widgets Column -->
+  <div class="col-lg-4 col-md-4 col-sm-4">
+
+    {% include 'jobs/_detail-sidebar.html' %}
+
+  </div>
+
+{% endblock %}

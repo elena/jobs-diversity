@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content_section %}
+<div class="container job-list">
+
+  {% if level %}
+    <!-- Content Section -->
+    <section id="content">
+      <div class="container">
+
+        <h4>Position Level: {{ level.title }}</h4>
+        <p>{{ level.description}}</p>
+
+      </div>
+    </section>
+  {% endif %}
+
+    <!-- Content Section -->
+    <section id="content">
+      <div class="container">
+
+    {% include 'jobs/_list.html' %}
+
+      </div>
+    </section>
+</div>
+{% endblock %}

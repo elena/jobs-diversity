@@ -1,0 +1,40 @@
+{% for object in object_list %}
+<div class="row">
+
+  {% include 'jobs/_detail-summary.html' %}
+
+</div>
+
+    <hr>
+{% endfor %}
+
+
+
+<div class="row">
+  <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+
+
+
+{% if is_paginated %}
+
+  <!-- Pager -->
+
+  <ul class="pager">
+
+    <li class="prev{% if not page_obj.has_previous %} disabled{% endif %}">
+      <a href="#" >&larr; Newer</a>
+    </li>
+
+    {% for pagenum in page_obj.page_range %}
+    <li><a href="{% url "paginated_job_list" page=pagenum %}">{{ pagenum }}</a></li>
+    {% endfor %}
+
+    <li class="next{% if not page_obj.has_next %} disabled{% endif %}">
+      <a href="#">Older &rarr;</a>
+    </li>
+
+  </ul>
+{% endif %}
+
+  </div>
+</div>

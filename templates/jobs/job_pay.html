@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+<meta name="robots" content="noindex">
+{% endblock header %}
+
+
+{% block content %}
+
+<div class="row">
+
+  <div class="col-lg-8 col-md-8 col-sm-8">
+
+    <h2>Complete!</h2>
+
+    <p>Once payment is complete, your posting will be moderated and put live (we will notify you).</p>
+
+    <div class="panel-group">
+
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <h4 class="panel-title">Make Payment</h4>
+        </div>
+
+        <div class="panel-body">
+
+          Credit Card
+          <form method="post" action="{{ request.path }}">
+            <div>{% csrf_token %}</div>
+            <ul>
+
+              <li><label for="id_number">Number:</label> <input autocomplete="off" data-stripe="number" id="id_number" inputmode="numeric" maxlength="16" minlength="13" name="number" pattern="[0-9]{13,16}" required="required" size="16" spellcheck="false" type="text"></li>
+              <li><label for="id_expiry_month">Expiry:</label> <input autocomplete="off" data-stripe="exp-month" id="id_expiry_month" inputmode="numeric" maxlength="2" minlength="1" name="expiry_month" pattern="[0-9]{1,2}" required="required" size="2" spellcheck="false" type="text"> <input autocomplete="off" data-stripe="exp-year" id="id_expiry_year" inputmode="numeric" maxlength="2" minlength="2" name="expiry_year" pattern="[0-9]{2}" required="required" size="2" spellcheck="false" type="text"></li>
+              <li><label for="id_cvc">CVC:</label> <input autocomplete="off" data-stripe="cvc" id="id_cvc" inputmode="numeric" maxlength="4" minlength="3" name="cvc" pattern="[0-9]{3,4}" required="required" size="4" spellcheck="false" type="text"></li>
+              <li><input type="submit" value="Pay"></li>
+
+              {# form.as_ul #}
+            </ul>
+          </form>
+
+        </div>
+OR
+
+        <div class="panel-body">
+
+          Paypal
+          {# PAYPAL button #}
+          {# @@ TODO minimum required for this type of posting is: level$  #}
+
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" class="donate form-input">
+            <input type="hidden" name="cmd" value="_donations">
+            <input type="hidden" name="business" value="paypal-facilitator@elena.net.au">
+            <input type="hidden" name="item_name" value="Jobs Posting: diversity.rocks">
+            <input type="hidden" name="item_number" value="jobs">
+            <input type="hidden" name="no_shipping" value="1">
+            <input type="hidden" name="return" value="https://jobs-diversity.herokuapp.com/payment/thanks/">
+            <input type="hidden" name="cancel_return" value="https://jobs-diversity.herokuapp.com/payment/cancel/">
+            <input type="hidden" name="rm" value="1">
+            <input type="hidden" name="no_note" value="1">
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="hidden" name="tax" value="0">
+            <input type="hidden" name="lc" value="US">
+            <input type="hidden" name="bn" value="PP-DonationsBF">
+            <label for="amount">$</label>
+            <input type="text" inputmode="numeric" name="amount" id="amount" value="185.00">
+            <button type="submit" title="Pay using Paypal">
+              <i class="icon icon-heart"></i>
+              <span class="visuallyhidden">Pay</span>
+            </button>
+            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            <img src="{{ STATIC_URL }}img/paypal.png">
+          </form>
+
+        </div>
+
+      </div>
+
+      <div class="panel-group" >
+
+        <div class="panel-body">
+        <p>To make changes to your posting please <a href="/contact/">contact</a> us.</p>
+        {% include 'jobs/_detail-summary.html' %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Sidebar Widgets Column -->
+  <div class="col-lg-4 col-md-4 col-sm-4">
+
+    {% include 'jobs/_detail-sidebar.html' %}
+
+  </div>
+
+</div>
+
+
+
+
+{% endblock %}
